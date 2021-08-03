@@ -1,0 +1,34 @@
+  <!--Name - Hemant Rana -->
+  <!--ctearedon - 27-july-2021 -->
+  {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="host_version"> 
+ 
+                          <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{% url 'upload_excel' %}">
+
+                            {% csrf_token %}
+                              <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input class="form-control" name="myfile" type="file" id="myfile">
+                                </div>
+                            </div>
+                              <div class="row">							
+                                  <div class="col-sm-12">
+                                    <input type="submit" id="btn_submit" class="btn btn-light btn-radius btn-brd grd1" value="Submit"/>
+                                     
+                                  </div>
+                              </div>
+                              <hr>
+                             
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+{% endblock %}

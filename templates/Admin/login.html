@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>KRM : Education</title>
+	
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- All PLUGINS CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/assets.css'  %}">
+	
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/typography.css'  %}">
+	
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/shortcodes/shortcodes.css'  %}">
+	
+	<link rel="stylesheet" type="text/css" href="{%  static 'admin/assets/css/style.css' %}">
+	
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/color/color-1.css'  %}">
+	
+</head>
+<body id="bg">
+<div class="page-wraper">
+	<div id="loading-icon-bx"></div>
+	<div class="account-form">
+		<div class="account-head" style="background-image:url(/static/admin/assets/images/background/bg2.jpg);">
+			<a href="index.html"><img src="{% static 'images/KRMULogo_w.svg' %}" alt=""></a>
+		</div>
+		<div class="account-form-inner">
+			<div class="account-container">
+				<div class="heading-bx left">
+					<h2 class="title-head">Login to your <span>Account</span></h2>
+					<p>Don't have an account? <a href="register.html">Create one here</a></p>
+				</div>	
+				<form class="contact-bx" method="POST" action="{% url 'dashboard' %}">
+					{% csrf_token %}
+					<div class="row placeani">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<div class="input-group">
+									<label>Your Name</label>
+									<input name="txt_loginName" type="text" required="" class="form-control" id="txt_loginName">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<div class="input-group"> 
+									<label>Your Password</label>
+									<input name="txt_loginpwd" type="password" class="form-control" required="" id="txt_loginpwd">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group form-forget">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+									<label class="custom-control-label" for="customControlAutosizing">Remember me</label>
+								</div>
+								<a href="forget-password.html" class="ml-auto">Forgot Password?</a>
+							</div>
+						</div>
+						<div class="col-lg-12 m-b30">
+							<button name="submit" type="submit" value="Submit" class="btn button-md">Login</button>
+						</div>
+						<div class="col-lg-12">
+							<h6>Login with Social media</h6>
+							<div class="d-flex">
+								<a class="btn flex-fill m-r5 facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a>
+								<a class="btn flex-fill m-l5 google-plus" href="#"><i class="fa fa-google-plus"></i>Google Plus</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- External JavaScripts -->
+
+<script src="{%  static  'admin/assets/js/jquery.min.js'  %} "></script>
+<!-- <script src="{%  static  'admin/assets/vendors/bootstrap/js/popper.min.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/bootstrap/js/bootstrap.min.js'  %} "></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/bootstrap-select/bootstrap-select.min.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/magnific-popup/magnific-popup.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/counter/waypoints-min.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/counter/counterup.min.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/imagesloaded/imagesloaded.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/masonry/masonry.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/masonry/filter.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/owl-carousel/owl.carousel.js'  %}"></script> -->
+<script src="{%  static  'admin/assets/js/functions.js'  %}"></script>
+<!-- <script src="{%  static  'admin/assets/js/contact.js'  %}"></script> -->
+<!-- <script src="{%  static  'admin/assets/vendors/switcher/switcher.js'  %}"></script> -->
+</body>
+
+</html>
