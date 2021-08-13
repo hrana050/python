@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
-import sys,include
+import sys
+from os import environ
 
 
 def main():

@@ -27,8 +27,8 @@ class Migration(migrations.Migration):
                 ('username', models.CharField(max_length=200)),
                 ('emailid', models.CharField(max_length=500)),
                 ('contactno', models.CharField(max_length=200)),
-                ('profilepic', models.CharField(max_length=200)),
-                #('profilepic', models.ImageField(upload_to='')),
+                #('profilepic', models.CharField(max_length=200)),
+                ('profilepic', models.ImageField(upload_to='')),
             ],
             options={
                 'db_table': 'signup',

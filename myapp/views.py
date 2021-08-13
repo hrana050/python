@@ -2,7 +2,7 @@ from decimal import Context
 from django.db import connection
 from mysite.models import usestoreprocesure
 from django.http import response
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from mysite.models import studentdetails
 from mysite.serializers import studentserialize 
@@ -12,11 +12,9 @@ from rest_framework.decorators import api_view
 from django.core.files.storage import FileSystemStorage
 
 
-
 def home(request):
     context={}
     return render(request,'index.html',context)
-
 
 def about(request):
     context={}
@@ -26,32 +24,46 @@ def master(request):
     context={}
     return render(request,'index.html',context)
 
+def is_admin(user):
+    return user.groups.filter(name='ADMIN').exists()
+
+def afterlogin_view(request):
+    if is_admin(request.user):
+        return render(request,'Admin/dashboard.html')
+    else:
+        return render(request,'Student/studentafterlogin.html')
+
+
 def storeprocedureuse(request):
-    context={}
+
     if request.method=="POST":
-           if request.POST.get('fname')and request.POST.get('emailid')and request.POST.get('contactno') and request.POST.get('username'):
+        if request.POST.get('fname')and request.POST.get('emailid')and request.POST.get('contactno') and request.POST.get('username'):
              enquiry=usestoreprocesure()
              enquiry.fullname=request.POST.get('fname')
              enquiry.email=request.POST.get('emailid')
              enquiry.contact=request.POST.get('contactno')
              enquiry.usernm=request.POST.get('username')
-             enquiry.img=request.POST.get('profilepic')
+             enquiry.profilepic=request.POST.get('profilepic')
              cursor=connection.cursor()
-             cursor.execute("call insertdata ('"+enquiry.fullname+"','"+enquiry.email+"','"+enquiry.contact+"','"+enquiry.usernm+"','"+enquiry.img+"')")
+             result=cursor.execute("call insertdata ('"+enquiry.fullname+"','"+enquiry.email+"','"+enquiry.contact+"','"+enquiry.usernm+"','"+enquiry.profilepic+"')")
+             print(result)
              form = usestoreprocesure(request.POST, request.FILES)
-             if form.is_valid():
-                form.save()
-                messages.success(request,"Student Enquiry submitted ")
-                return render(request,'index.html')
+            #  if form.is_valid():
+             form.save()
+             return render(request,'index.html')
+        else:
+            return render(request,'index.html')
+    else:
+        return render(request,'index.html')
 
 
 @api_view(['POST'])
 def saverecord(request):
     if request.method=="POST":
-    #      form = studentserialize(request.POST, request.FILES)
-    # if form.is_valid():
-    #    form.save()
-     saveserialize=studentserialize(data=request.data)
+        form = studentserialize(request.POST, request.FILES)
+        if form.is_valid():
+           form.save()
+    saveserialize=studentserialize(data=request.data)
     if saveserialize.is_valid():
           saveserialize.save()
 
@@ -61,7 +73,8 @@ def saverecord(request):
          
     return Response(saveserialize.data,status=status.HTTP_201_CREATED)
     return Response(saveserialize.data,status=status.HTTP_400_BAD_REQUEST)
-  #  return render(request, 'index.html')
+   
+    #return render(request, 'index.html')
 
 
 

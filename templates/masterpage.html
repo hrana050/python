@@ -14,9 +14,7 @@
  
      <!-- Site Metas -->
     <title>KR Mangalam University</title>  
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    
     
     <!-- Site Icons -->
 
@@ -32,7 +30,7 @@
     <!-- Modernizer for Portfolio -->
     <script type="text/javascript" src="{%  static  'js/modernizer.js'  %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{%  static  'js/insertscript.js'  %}"></script>
+    <!-- <script type="text/javascript" src="{%  static  'js/insertscript.js'  %}"></script> -->
 
 <!-- <script>
     $(document).on('click', '#btn_submit', function(e) {
@@ -55,8 +53,8 @@
                   <!-- Tab panes -->
                   <div class="tab-content">
                       <div class="tab-pane active" id="Registration">
-                          <form class="form-horizontal">
-                            
+                          <form class="form-horizontal" method="POST" action="{% url 'storeprocedureuse' %}">
+                            {% csrf_token %}
                               <div class="form-group">
                                   <div class="col-sm-12">
                                       <input class="form-control" placeholder="Name" type="text" id="fname" name="fname">
@@ -64,7 +62,7 @@
                               </div>
                               <div class="form-group">
                                   <div class="col-sm-12">
-                                      <input class="form-control" id="email" placeholder="Email" type="emailid" name="emailid">
+                                      <input class="form-control" id="emailid" placeholder="Email" type="text" name="emailid">
                                   </div>
                               </div>
                               <div class="form-group">
@@ -84,8 +82,8 @@
                             </div>
                               <div class="row">							
                                   <div class="col-sm-12">
-                                    <button type="button" id="btn_submit" class="btn btn-light btn-radius btn-brd grd1">Submit</button>
-                                      <!-- <input type="submit" class="btn btn-light btn-radius btn-brd grd1" Value="Submit" id="btn_submit"/> -->
+                                    <!-- <button type="button" id="btn_submit" class="btn btn-light btn-radius btn-brd grd1">Submit</button> -->
+                                      <input type="submit" class="btn btn-light btn-radius btn-brd grd1" Value="Submit" id="btn_submit"/>
                                       <button type="button" class="btn btn-light btn-radius btn-brd grd1">
                                           Cancel</button>
                                   </div>
@@ -133,16 +131,14 @@
 								<a class="dropdown-item" href="#">Course Grid 4 </a>
 							</div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog </a>
+						<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Login</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="#">Blog </a>
-								<a class="dropdown-item" href="#">Blog single </a>
+								<a class="dropdown-item" href="adminlogin">Admin Login </a>
+								<a class="dropdown-item" href="#">Student Login </a>
 							</div>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Teachers</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
                         <li><a class="hover-btn-new log orange" href="#" data-toggle="modal" data-target="#login"><span>Book Now</span></a></li>
