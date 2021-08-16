@@ -1,0 +1,190 @@
+{%extends  'Admin/adminlayout.html'%}
+{%block main_body%}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+$(function () {
+    $("#studentimg").attr("src","static/admin/dist/img/preview.png");
+    $("#profilepic").change(function () {
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+           
+                if (typeof (FileReader) != "undefined") {
+                    $("#studentimg").show();
+                    $("#studentimg").append("<img />");
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#studentimg").attr("src", e.target.result);
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                } else {
+                    alert("This browser does not support FileReader.");
+                }
+           
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    });
+});
+</script>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Student Add</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Master</a></li>
+            <li class="breadcrumb-item"><a href="#">Manage Student</a></li>
+            <li class="breadcrumb-item active">Student Add</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Student</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-6">
+                  <label for="inputName">First Name</label>
+                  <input type="text" id="txt_f_name" class="form-control" name="txt_f_name">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputName">Last Name</label>
+                    <input type="text" id="txt_l_name" class="form-control" name="txt_l_name">
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                      <label for="inputName">Student Id</label>
+                      <input type="text" id="txt_id" class="form-control" name="txt_id">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputName">User Id</label>
+                        <input type="text" id="txt_userid" class="form-control" name="txt_userid">
+                      </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                      <label for="inputName">EmailId</label>
+                      <input type="text" id="txt_email" class="form-control" name="txt_email">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputName">Password</label>
+                        <input type="text" id="txt_pwd" class="form-control" name="txt_pwd">
+                      </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                      <label for="inputName">Contact No</label>
+                      <input type="text" id="txt_contact" class="form-control" name="txt_contact">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputName">DOB</label>
+                        <input type="text" id="txt_dob" class="form-control datepicker" name="txt_dob">
+                      </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                      <label for="inputName">Course</label>
+                      <select id="stu_course" class="form-control custom-select" name="stu_course">
+                        <option selected disabled>Select one</option>
+                        <option value="1">CSE</option>
+                        <option value="2">ME</option>
+                        <option value="3">ECE</option>
+                        <option value="4">CIVIL</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputName">Admission Year</label>
+                        <select id="stu_year" class="form-control custom-select" name="stu_year">
+                            <option selected disabled>Select one</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                          </select>
+                      </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                      <label for="inputName">Address</label>
+                        <textarea id="address" class="form-control" rows="4" name="address"></textarea>
+                    </div>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                      <label for="inputName">Status</label>
+                      <select id="stu_status" class="form-control custom-select" name="stu_status">
+                        <option selected disabled>Select Status</option>
+                        <option value="1">Active</option>
+                        <option value="0">inActive</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputName">Upload Profile Pic</label>
+                        <input class="form-control" name="profilepic" type="file" id="profilepic">
+                      </div>
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <a href="#" class="btn btn-secondary float-right">Cancel</a>
+                      <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px;">
+                    </div>
+                  </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-4">
+            <div class="card card-secondary">
+              <div class="card-header" style="background-color: #f6f6f6;;">
+                <h3 class="card-title">Selected Pic</h3>
+                <img id="studentimg" src="#" alt="your image" style="width: 100%;" />
+              </div>
+              
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+       
+      </section>
+      <!-- /.content -->
+      {%endblock%}

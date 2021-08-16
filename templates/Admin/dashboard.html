@@ -1,352 +1,356 @@
 {%extends  'Admin/adminlayout.html'%}
-
-{%block contentarea%}
-<!--Main container start -->
-<main class="ttr-wrapper">
-    <div class="container-fluid">
-        <div class="db-breadcrumb">
-            <h4 class="breadcrumb-title">Dashboard</h4>
-            <ul class="db-breadcrumb-list">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li>Dashboard</li>
-            </ul>
-        </div>	
-        <!-- Card -->
-        <div class="row">
-            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-                <div class="widget-card widget-bg1">					 
-                    <div class="wc-item">
-                        <h4 class="wc-title">
-                            Total Frofit
-                        </h4>
-                        <span class="wc-des">
-                            All Customs Value
-                        </span>
-                        <span class="wc-stats">
-                            $<span class="counter">18</span>M 
-                        </span>		
-                        <div class="progress wc-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <span class="wc-progress-bx">
-                            <span class="wc-change">
-                                Change
-                            </span>
-                            <span class="wc-number ml-auto">
-                                78%
-                            </span>
-                        </span>
-                    </div>				      
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-                <div class="widget-card widget-bg2">					 
-                    <div class="wc-item">
-                        <h4 class="wc-title">
-                             New Feedbacks
-                        </h4>
-                        <span class="wc-des">
-                            Customer Review
-                        </span>
-                        <span class="wc-stats counter">
-                            120 
-                        </span>		
-                        <div class="progress wc-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 88%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <span class="wc-progress-bx">
-                            <span class="wc-change">
-                                Change
-                            </span>
-                            <span class="wc-number ml-auto">
-                                88%
-                            </span>
-                        </span>
-                    </div>				      
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-                <div class="widget-card widget-bg3">					 
-                    <div class="wc-item">
-                        <h4 class="wc-title">
-                            New Orders 
-                        </h4>
-                        <span class="wc-des">
-                            Fresh Order Amount 
-                        </span>
-                        <span class="wc-stats counter">
-                            772 
-                        </span>		
-                        <div class="progress wc-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <span class="wc-progress-bx">
-                            <span class="wc-change">
-                                Change
-                            </span>
-                            <span class="wc-number ml-auto">
-                                65%
-                            </span>
-                        </span>
-                    </div>				      
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-                <div class="widget-card widget-bg4">					 
-                    <div class="wc-item">
-                        <h4 class="wc-title">
-                            New Users 
-                        </h4>
-                        <span class="wc-des">
-                            Joined New User
-                        </span>
-                        <span class="wc-stats counter">
-                            350 
-                        </span>		
-                        <div class="progress wc-progress">
-                            <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <span class="wc-progress-bx">
-                            <span class="wc-change">
-                                Change
-                            </span>
-                            <span class="wc-number ml-auto">
-                                90%
-                            </span>
-                        </span>
-                    </div>				      
-                </div>
-            </div>
-        </div>
-        <!-- Card END -->
-        <div class="row">
-            <!-- Your Profile Views Chart -->
-            <div class="col-lg-8 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Your Profile Views</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <canvas id="chart" width="100" height="45"></canvas>
-                    </div>
-                </div>
-            </div>
-            <!-- Your Profile Views Chart END-->
-            <div class="col-lg-4 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Notifications</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div class="noti-box-list">
-                            <ul>
-                                <li>
-                                    <span class="notification-icon dashbg-gray">
-                                        <i class="fa fa-check"></i>
-                                    </span>
-                                    <span class="notification-text">
-                                        <span>Sneha Jogi</span> sent you a message.
-                                    </span>
-                                    <span class="notification-time">
-                                        <a href="#" class="fa fa-close"></a>
-                                        <span> 02:14</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notification-icon dashbg-yellow">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span>
-                                    <span class="notification-text">
-                                        <a href="#">Your order is placed</a> sent you a message.
-                                    </span>
-                                    <span class="notification-time">
-                                        <a href="#" class="fa fa-close"></a>
-                                        <span> 7 Min</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notification-icon dashbg-red">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </span>
-                                    <span class="notification-text">
-                                        <span>Your item is shipped</span> sent you a message.
-                                    </span>
-                                    <span class="notification-time">
-                                        <a href="#" class="fa fa-close"></a>
-                                        <span> 2 May</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notification-icon dashbg-green">
-                                        <i class="fa fa-comments-o"></i>
-                                    </span>
-                                    <span class="notification-text">
-                                        <a href="#">Sneha Jogi</a> sent you a message.
-                                    </span>
-                                    <span class="notification-time">
-                                        <a href="#" class="fa fa-close"></a>
-                                        <span> 14 July</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notification-icon dashbg-primary">
-                                        <i class="fa fa-file-word-o"></i>
-                                    </span>
-                                    <span class="notification-text">
-                                        <span>Sneha Jogi</span> sent you a message.
-                                    </span>
-                                    <span class="notification-time">
-                                        <a href="#" class="fa fa-close"></a>
-                                        <span> 15 Min</span>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>New Users</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div class="new-user-list">
-                            <ul>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Anna Strong </a>
-                                        <span class="new-users-info">Visual Designer,Google Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name"> Milano Esco </a>
-                                        <span class="new-users-info">Product Designer, Apple Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Bold  </a>
-                                        <span class="new-users-info">Web Developer, Facebook Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Wiltor Delton </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic3.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Stone </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc  </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Orders</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div class="orders-list">
-                            <ul>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm red">Unpaid</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Revenue</a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm red">Unpaid</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Revenue</a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Basic Calendar</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{%block main_body%}
+{% load static %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-</main>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>Total Teacher</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>Total School</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>15000</h3>
+
+                <p>Total Student</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>300</h3>
+
+                <p>Total Employee</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- DIRECT CHAT -->
+            <div class="card direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title">Direct Chat</h3>
+                <div class="card-tools">
+                  <span title="3 New Messages" class="badge badge-primary">3</span>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+                    <i class="fas fa-comments"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="{% static 'admin/dist/img/user1-128x128.jpg' %}" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Is this template really for free? That's unbelievable!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="{% static 'admin/dist/img/user3-128x128.jpg' %}" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      You better believe it!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="{% static 'admin/dist/img/user1-128x128.jpg' %}" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Working with AdminLTE on a great new app! Wanna join?
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="{% static 'admin/dist/img/user3-128x128.jpg' %}" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      I would love to.
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                </div>
+                <!--/.direct-chat-messages-->
+
+                <!-- Contacts are loaded here -->
+                <div class="direct-chat-contacts">
+                  <ul class="contacts-list">
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="{% static 'admin/dist/img/user1-128x128.jpg' %}" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Count Dracula
+                            <small class="contacts-list-date float-right">2/28/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">How have you been? I was...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Sarah Doe
+                            <small class="contacts-list-date float-right">2/23/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">I will be waiting for...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Nadia Jolie
+                            <small class="contacts-list-date float-right">2/20/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">I'll call you back at...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Nora S. Vans
+                            <small class="contacts-list-date float-right">2/10/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Where is your new...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            John K.
+                            <small class="contacts-list-date float-right">1/27/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Can I take a look at...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Avatar">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Kenneth M.
+                            <small class="contacts-list-date float-right">1/4/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Never mind I found...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                  </ul>
+                  <!-- /.contacts-list -->
+                </div>
+                <!-- /.direct-chat-pane -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <div class="input-group">
+                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Send</button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!--/.direct-chat -->
+
+            <!-- /.card -->
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+            <!-- solid sales graph -->
+            <div class="card bg-gradient-info">
+              <div class="card-header border-0">
+                <h3 class="card-title">
+                  <i class="fas fa-th mr-1"></i>
+                  Sales Graph
+                </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Mail-Orders</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Online</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">In-Store</div>
+                  </div>
+                  <!-- ./col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+   
 {%endblock%}

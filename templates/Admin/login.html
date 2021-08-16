@@ -1,106 +1,88 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KRM | Admin Login Panel</title>
 
-	<!-- META ============================================= -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-	
-	<!-- PAGE TITLE HERE ============================================= -->
-	<title>KRM : Education</title>
-	
-	<!-- MOBILE SPECIFIC ============================================= -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- All PLUGINS CSS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/assets.css'  %}">
-	
-	<!-- TYPOGRAPHY ============================================= -->
-	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/typography.css'  %}">
-	
-	<!-- SHORTCODES ============================================= -->
-	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/shortcodes/shortcodes.css'  %}">
-	
-	<link rel="stylesheet" type="text/css" href="{%  static 'admin/assets/css/style.css' %}">
-	
-	<!-- STYLESHEETS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="{%  static  'admin/assets/css/color/color-1.css'  %}">
-	
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="{%  static  'admin/plugins/fontawesome-free/css/all.min.css'  %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" type="text/css" href="{%  static  'admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css'  %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{%  static  'admin/dist/css/adminlte.min.css'  %}">
 </head>
-<body id="bg">
-<div class="page-wraper">
-	<div id="loading-icon-bx"></div>
-	<div class="account-form">
-		<div class="account-head" style="background-image:url(/static/admin/assets/images/background/bg2.jpg);">
-			<a href="index.html"><img src="{% static 'images/KRMULogo_w.svg' %}" alt=""></a>
-		</div>
-		<div class="account-form-inner">
-			<div class="account-container">
-				<div class="heading-bx left">
-					<h2 class="title-head">Login to your <span>Account</span></h2>
-					<p>Don't have an account? <a href="register.html">Create one here</a></p>
-				</div>	
-				<form class="contact-bx" method="POST" action="{% url 'adminlogin' %}">
-					{% csrf_token %}
-					<div class="row placeani">
-						<div class="col-lg-12">
-							<div class="form-group">
-							{% for message in messages %}
-                            <h4 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/home"><b>KRM</b> Admin Panel</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+      {% for message in messages %}
+                            <p class='login-box-msg'>
+								{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+								<span style="color:red">{{ message }}</span>
+								{% endif %}
+								</p>
                            {% endfor %}
-                           </div>
-							<div class="form-group">
-								<div class="input-group">
-									<label>Your Name</label>
-									<input name="txt_loginName" type="text" required="" class="form-control" id="txt_loginName">
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="form-group">
-								<div class="input-group"> 
-									<label>Your Password</label>
-									<input name="txt_loginpwd" type="password" class="form-control" required="" id="txt_loginpwd">
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="form-group form-forget">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-									<label class="custom-control-label" for="customControlAutosizing">Remember me</label>
-								</div>
-								<a href="forget-password.html" class="ml-auto">Forgot Password?</a>
-							</div>
-						</div>
-						<div class="col-lg-12 m-b30">
-							<button name="submit" type="submit" value="Submit" class="btn button-md">Login</button>
-						</div>
-						<div class="col-lg-12">
-							<h6>Login with Social media</h6>
-							<div class="d-flex">
-								<a class="btn flex-fill m-r5 facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a>
-								<a class="btn flex-fill m-l5 google-plus" href="#"><i class="fa fa-google-plus"></i>Google Plus</a>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+      <form method="POST" action="{% url 'adminlogin' %}">
+		{% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Email" id="txt_loginName" name="txt_loginName">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" id="txt_loginpwd" name="txt_loginpwd">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <!-- /.social-auth-links -->
+
+      <p class="mb-1">
+        <a href="forgot-password.html">I forgot my password</a>
+      </p>
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
 </div>
+<!-- /.login-box -->
 
-<!-- External JavaScripts -->
-
-<script src="{%  static  'admin/assets/js/jquery.min.js'  %} "></script>
-
-<script src="{%  static  'admin/assets/js/functions.js'  %}"></script>
-
+<!-- jQuery -->
+<script src="{%  static  'admin/plugins/jquery/jquery.min.js'  %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{%  static  'admin/plugins/bootstrap/js/bootstrap.bundle.min.js'  %}"></script>
+<!-- AdminLTE App -->
+<script src="{%  static  'admin/dist/js/adminlte.min.js'  %}"></script>
 </body>
-
 </html>
+

@@ -5,7 +5,7 @@ from mysite.models import loginmodel
 from rest_framework.response import Response
 from django.contrib import messages
 from rest_framework import status
-
+import os
 def login(request):
     context={}
     if request.method=="POST":
@@ -22,7 +22,8 @@ def login(request):
                count=0
                for number in result:
                 count=1
-              
+                request.session['usersessionid']=number[0]
+                request.session['usersessionname']=number[1]
                if count>0: 
                   return redirect('dashboard')
                else:
@@ -30,9 +31,14 @@ def login(request):
                   return render(request, 'Admin/login.html',context)
                 
     else: 
+               split_tup = os.path.splitext('my_file.txt')
+               file_extension = split_tup[1]
+               print(file_extension)
                return render(request,'Admin/login.html',context)
 
 def dashboard(request):
     context={}
     return render(request,'Admin/dashboard.html',context)
+
+
 
