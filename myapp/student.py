@@ -5,10 +5,13 @@ from mysite.models import loginmodel, studentmodel
 from rest_framework.response import Response
 from django.contrib import messages
 from rest_framework import status
-
+from django.core.files.storage import FileSystemStorage
+import os
+import datetime
 
 def addstudent(request):
-    context={}
+    
+    context={} 
     if request.method=="POST":
         if request.POST.get('txt_f_name')and request.POST.get('txt_l_name'):
              enquiry=studentmodel()
@@ -21,27 +24,42 @@ def addstudent(request):
              enquiry.contactno=request.POST.get('txt_contact')
              enquiry.year=request.POST.get('stu_year')
              enquiry.dob=request.POST.get('txt_dob')
-             enquiry.course=request.POST.get('stu_course')
+             enquiry.course=int(request.POST.get('stu_course'))
              enquiry.address=request.POST.get('address')
-             enquiry.profilepic=request.POST.get('profilepic')
-             enquiry.status=request.POST.get('stu_status')
+             enquiry.profilepic=request.FILES['profile']
+             fs=FileSystemStorage()
+             fs.save(enquiry.profilepic.name,enquiry.profilepic)
+             enquiry.status=int(request.POST.get('stu_status'))
+             enquiry.createdon=datetime.date.today()
+             enquiry.save()
              cursor=connection.cursor()
-             cursor.execute("call insertdata ('"+enquiry.firstname+"','"+enquiry.lastname+"','"+enquiry.idno+
-                                                     "','"+enquiry.userid+"','"+enquiry.emailid+"','"+enquiry.password+
-                                                     "','"+ enquiry.contactno+"','"+ enquiry.year+"','"+ enquiry.dob+
-                                                     "','"+ enquiry.course+"','"+ enquiry.address+"','"+ enquiry.profilepic+"','"+enquiry.status+"')")
+             cursor.execute("select sno  from addstudent order by sno desc  LIMIT 1")
              result=cursor.fetchall()
+             connection.close()
              count=0
              for number in result:
-                cursor.execute("update  addstudent profilepic='"+number[0]+"' where sno='"+ number[0]+"'")
-                count=1
-                if count>0:
-                           messages.success(request, "Student details submit successfully. !")
+                 print(number[0])
+                 count=1
+             if count==1:
+                           messages.success(request, enquiry.firstname)
                            return render(request, 'Admin/Addstudent.html',context)
-                else:
-                           messages.error(request, "Please fill the correct information. !")
+             else:
+                           messages.error(request, enquiry.firstname)
                            return render(request, 'Admin/Addstudent.html',context)
         else:
+             messages.error(request, "Please fill the field...!")
              return render(request, 'Admin/Addstudent.html',context)          
     else: 
              return render(request,'Admin/Addstudent.html',context)
+
+def studentlist(request):
+     context={} 
+     cursor=connection.cursor()
+     cursor.execute("select *  from addstudent where status=1")
+     result=cursor.fetchall()
+     print(result)
+     connection.close()
+     count=0
+     for number in result:
+         print(number[0])
+     return render(request, 'Admin/studentlist.html',{'result':result})

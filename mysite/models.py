@@ -35,7 +35,7 @@ class importexceltodb(models.Model):
           db_table="upload_Excel"
 
 class studentmodel(models.Model):
-   sno =models.IntegerField
+   sno =models.IntegerField()
    firstname =models.CharField(max_length=200)
    lastname =models.CharField(max_length=200)
    idno =models.CharField(max_length=200)
@@ -44,11 +44,14 @@ class studentmodel(models.Model):
    password=models.CharField(max_length=200)
    contactno =models.CharField(max_length=200)
    year =models.CharField(max_length=200)
-   dob =models.DateTimeField
-   course =models.IntegerField
+   dob =models.CharField(max_length=200)
+   course =models.IntegerField()
    address =models.CharField(max_length=6000)
    profilepic =models.ImageField(upload_to='')
-   status=models.IntegerField
+   status=models.IntegerField()
+   createdon=models.DateField()
+   class Meta:
+        db_table = "addstudent"
 
 
 

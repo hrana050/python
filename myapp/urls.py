@@ -16,6 +16,7 @@ urlpatterns=[
     path('adminlogin',loginviews.login,name='adminlogin'),
     #path('afterlogin', views.afterlogin_view),
     path('dashboard', loginviews.dashboard, name='dashboard'),
+    path('studentlist', student.studentlist, name='studentlist'),
     path('addstudent', student.addstudent, name='addstudent'),
     url('saverecord',views.saverecord,name='saverecord'),
     url('storeprocedureuse',views.storeprocedureuse,name='storeprocedureuse'),

@@ -31,9 +31,6 @@ def login(request):
                   return render(request, 'Admin/login.html',context)
                 
     else: 
-               split_tup = os.path.splitext('my_file.txt')
-               file_extension = split_tup[1]
-               print(file_extension)
                return render(request,'Admin/login.html',context)
 
 def dashboard(request):

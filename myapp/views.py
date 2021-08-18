@@ -11,7 +11,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from django.core.files.storage import FileSystemStorage
 
-
 def home(request):
     context={}
     return render(request,'index.html',context)
@@ -32,7 +31,6 @@ def afterlogin_view(request):
         return render(request,'Admin/dashboard.html')
     else:
         return render(request,'Student/studentafterlogin.html')
-
 
 def storeprocedureuse(request):
 
@@ -73,7 +71,6 @@ def saverecord(request):
          
     return Response(saveserialize.data,status=status.HTTP_201_CREATED)
     return Response(saveserialize.data,status=status.HTTP_400_BAD_REQUEST)
-   
     #return render(request, 'index.html')
 
 
