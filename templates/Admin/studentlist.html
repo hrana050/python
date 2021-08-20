@@ -53,13 +53,15 @@
                     {% for stud in result %}
                   <tr>
                       
-                    <td>stud.[0]</td>
-                    <td>{{stud.firstname}} {{stud.lastname}}</td>
-                    <td>{{stud.idno}}</td>
-                    <td>{{stud.course}}</td>
-                    <td>{{stud.year}}</td>
-                    <td>{{stud.status}}</td>
-                    <td>Add</td>
+                    <td>{{stud.0}}</td>
+                    <td>{{stud.1}} {{stud.2}}</td>
+                    <td>{{stud.3}}</td>
+                    <td>
+                      {{stud.10}}
+                   </td>
+                    <td>{{stud.8}}</td>
+                    <td>{{stud.13}}</td>
+                    <td><i class="fas fa-edit"></i>  <i class="fas fa-trash-alt"></i></td>
                   </tr>
                   {% endfor %}
                   </tbody>

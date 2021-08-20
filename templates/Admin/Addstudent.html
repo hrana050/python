@@ -140,10 +140,9 @@ $(function () {
                       <label for="inputName">Course</label>
                       <select id="stu_course" class="form-control custom-select" name="stu_course">
                         <option selected disabled>Select one</option>
-                        <option value="1">CSE</option>
-                        <option value="2">ME</option>
-                        <option value="3">ECE</option>
-                        <option value="4">CIVIL</option>
+                        {% for course in records %}
+                        <option value="{{ course.0 }}">{{ course.1 }}</option>
+                        {% endfor %}
                       </select>
                     </div>
                     <div class="col-md-6">

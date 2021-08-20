@@ -3,14 +3,12 @@ from django.shortcuts import redirect, render
 from django.db import connection
 from mysite.models import loginmodel, studentmodel
 from rest_framework.response import Response
-from django.contrib import messages
 from rest_framework import status
 from django.core.files.storage import FileSystemStorage
 import os
 import datetime
 
-def addstudent(request):
-    
+def addstudent(request):    
     context={} 
     if request.method=="POST":
         if request.POST.get('txt_f_name')and request.POST.get('txt_l_name'):
@@ -50,14 +48,16 @@ def addstudent(request):
              messages.error(request, "Please fill the field...!")
              return render(request, 'Admin/Addstudent.html',context)          
     else: 
-             return render(request,'Admin/Addstudent.html',context)
+            cursor = connection.cursor()
+            cursor.execute('select * from addcourse')
+            records = cursor.fetchall()
+            return render(request,'Admin/Addstudent.html',{'records':records})
 
 def studentlist(request):
      context={} 
      cursor=connection.cursor()
-     cursor.execute("select *  from addstudent where status=1")
+     cursor.execute("select *  from addstudent")
      result=cursor.fetchall()
-     print(result)
      connection.close()
      count=0
      for number in result:

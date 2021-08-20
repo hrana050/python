@@ -53,6 +53,15 @@ class studentmodel(models.Model):
    class Meta:
         db_table = "addstudent"
 
+class addcoursemodel(models.Model):
+      sno=models.IntegerField()
+      cousename=models.CharField(max_length=1000)
+      status=models.IntegerField()
+      createdon=models.DateField()
+      class Meta:
+        db_table = "addcourse"
+
+
 
 
     
