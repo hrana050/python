@@ -30331,14 +30331,14 @@ a.disabled.mailbox-attachment-close {
 }
 .login-logo a,
 .register-logo a {
-    color: #495057;
+    color: #ffffff;
 }
 .login-page,
 .register-page {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #e9ecef;
+    background-color: #007bff;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;

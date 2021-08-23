@@ -2,6 +2,7 @@
 {%block main_body%}
 {% load static %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="{%  static  'js/updatecourse.js'  %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#divbannerlist').on('click', '#btndelete', function (e) {
@@ -67,7 +68,8 @@
                   </button>
                 </div>
               </div>
-              <form method="POST" action="{% url 'addcourse' %}" enctype="multipart/form-data">
+              <form method="POST" action="{% url 'addcourse' %}" class="update">
+                <input type="hidden" id="courseid" name="courseid">
                 {% csrf_token %}
               <div class="card-body">
                 <div class="form-group">
@@ -79,7 +81,7 @@
                 <div class="col-md-6">
                     <label for="inputName">Status</label>
                     <select id="status" class="form-control custom-select" name="status">
-                      <option selected disabled>Select Status</option>
+                      <option value="2" selected disabled>Select Status</option>
                       <option value="1">Active</option>
                       <option value="0">inActive</option>
                     </select>
@@ -88,9 +90,10 @@
                 </div>
               
                 <div class="row">
-                    <div class="col-12">
-                      <a href="#" class="btn btn-secondary float-right">Cancel</a>
-                      <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px;">
+                    <div class="col-12" id="Divhide">
+                      <a href="#" class="btn btn-secondary float-right" id="cancel" onclick="cancelfunction()">Cancel</a>
+                      <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px; cursor:pointer" id="submit">
+                      <a href="#" class="btn btn-success float-right" style="margin-right: 15px;" id="update" onclick="updatefunction()">Update</a>
                     </div>
                   </div>
               </div>
@@ -116,7 +119,7 @@
                         {% for course in result %}
                       <tr>
                           
-                        <td>{{course.0}}</td>
+                        <td>{{forloop.counter}}</td>
                         <td>{{course.1}}</td>
                         <td>
                             {% if course.2 == 1 %}
@@ -128,7 +131,7 @@
                         </td>
                        
                         <td>
-                            <a href="/editcourse/{{course.0}}"><i class="fas fa-edit"></i> </a>
+                            <a id="{{course.0}}" onclick="getfunction(this.id)" style="cursor: pointer;" class="test"><i class="fas fa-edit"></i> </a>
                             <a href="/deletecourse/{{course.0}}" id="btndelete"><i class="fas fa-trash-alt" style="color:red"></i></a>
                            </td>
                       </tr>
