@@ -29,6 +29,9 @@ def login(request):
                else:
                   messages.error(request,"invalid user name and password !")
                   return render(request, 'Admin/login.html',context)
+            else:
+                messages.error(request,"Enter the username and password !")
+                return render(request,'Admin/login.html',context)
                 
     else: 
                return render(request,'Admin/login.html',context)

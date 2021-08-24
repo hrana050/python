@@ -1,9 +1,11 @@
+import json
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from mysite.models import addcoursemodel
 import datetime
 from django.db import connection
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def addcourse(request):
     context={}
@@ -11,10 +13,12 @@ def addcourse(request):
         if request.POST.get('txt_course'):
             course=addcoursemodel()
             course.cousename=request.POST.get('txt_course')
-            course.status=int(request.POST.get('status'))
-            course.createdon=datetime.date.today()
-            course.save()
+            course.status=request.POST.get('status')
             cursor=connection.cursor()
+            cursor.execute("call insertcourse ('"+course.cousename+"','"+course.status+"')")
+            connection.close()
+            cursor=connection.cursor()
+            #cursor.execute("call getcourselist")
             cursor.execute('select * from addcourse')
             result=cursor.fetchall()
             connection.close()
@@ -25,30 +29,20 @@ def addcourse(request):
              return render(request,'Admin/course.html',context)
     else:
         cursor=connection.cursor()
+        #cursor.execute("call getcourselist()")
         cursor.execute('select * from addcourse')
         result=cursor.fetchall()
         connection.close()
         return render(request,'Admin/course.html',{'result':result})
 def deletecourse(request,sno):
     cursor=connection.cursor()
-    cursor.execute("delete from addcourse where sno='"+sno+"'")
-    result=cursor.fetchall()
+    cursor.execute("call deletecourse ('"+ sno +"')")
     connection.close()
     return redirect('addcourse')
 
-# def editcourse(request,sno):
-#     cursor=connection.cursor()
-#     cursor.execute("select * from addcourse where sno='"+sno+"'")
-#     result=cursor.fetchall()
-#     connection.close()
-#     cursor = connection.cursor()
-#     cursor.execute("select * from addcourse")
-#     records1 = cursor.fetchall()
-#     context={'editdata':result, 'result':records1}
-#     return render(request,'Admin/course.html',context)
 def editcourse(request,sno):
     cursor=connection.cursor()
-    cursor.execute("select * from addcourse where sno='"+sno+"'")
+    cursor.execute("select * from addcourse where sno='"+ sno +"'")
     result=cursor.fetchall()
     connection.close()
     for values in result:
@@ -60,29 +54,29 @@ def editcourse(request,sno):
     }
     return JsonResponse(data)
 
-def updatecourse(request,coursedata):
-    print(coursedata)
+@csrf_exempt
+def updatecourse(request): 
     if request.method=="POST":
-        if request.POST.get('txt_course')and request.POST.get('status'):
-           course=addcoursemodel()
-           course.cousename=request.POST.get('txt_course')
-           print(course.cousename)
-           course.status=int(request.POST.get('status'))
+        if request.POST.get('coursevalue')and request.POST.get('status'):
+           stu_coursename=request.POST.get('coursevalue')
+           stu_status=request.POST.get('status')
+           stu_sno=request.POST.get('sno')
            cursor=connection.cursor()
-           cursor.execute("update addcourse set cousename='"+course.cousename+"',status='"+course.status+"'where sno='"+1+"'")
-           result=cursor.fetchall()
+           cursor.execute("call updatecourse ('"+stu_sno+"','"+stu_coursename+"','"+stu_status+"')")
            connection.close()
            data = {
-            'my_data':result
+            'my_data':1
            }
            return JsonResponse(data)
         else:
            data = {
             'my_data':"error"
            }
+        return JsonResponse(data)
     else:
          data = {
             'my_data':"fillfield"
            }
+    return JsonResponse(data)
 
    

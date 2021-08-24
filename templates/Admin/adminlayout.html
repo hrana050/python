@@ -27,6 +27,32 @@
 <link rel="stylesheet" type="text/css" href="{%  static  'admin/plugins/daterangepicker/daterangepicker.css'  %}">
  <!-- summernote -->
  <link rel="stylesheet" type="text/css" href="{%  static  'admin/plugins/summernote/summernote-bs4.min.css'  %}">
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script>
+
+  $('document').ready(function () {
+      $('body').on('click', '.sidebar-menu a', function () {
+          var a = "hello";
+          var i = $('.sidebar-menu a').index(this);
+          sessionStorage.setItem("aindex", i);
+      });
+
+      var i = sessionStorage.getItem("aindex");
+      if (i != null) {
+          var anchorelement = $(".sidebar-menu a").eq(i);
+          $(anchorelement).parentsUntil("ul.sidebar", "ul").addClass("menu-open").css("display", "block");
+          $(anchorelement).parentsUntil("ul.sidebar", "li").addClass("active");
+      }
+      else {
+          $("ul.sidebar-menu li").eq(1).addClass("active");
+      }
+
+      $('body').on('click', '.signout', function () {
+          sessionStorage.removeItem("aindex");
+      });
+  });
+
+</script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -244,6 +270,9 @@
 <script src="{%  static  'admin/plugins/summernote/summernote-bs4.min.js'  %}"></script>
 <!-- overlayScrollbars -->
 <script src="{%  static  'admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'  %}"></script>
+<!-- jquery-validation -->
+<script src="{%  static  'admin/plugins/jquery-validation/jquery.validate.min.js'  %}"></script>
+<script src="{%  static  'admin/plugins/jquery-validation/additional-methods.min.js'  %}"></script>
 <!-- AdminLTE App -->
 <script src="{%  static  'admin/dist/js/adminlte.js'  %}"></script>
 <!-- AdminLTE for demo purposes -->

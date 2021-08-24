@@ -58,8 +58,6 @@ class addcoursemodel(models.Model):
       cousename=models.CharField(max_length=1000)
       status=models.IntegerField()
       createdon=models.DateField()
-      class Meta:
-        db_table = "addcourse"
 
 
 
