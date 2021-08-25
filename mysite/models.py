@@ -58,6 +58,7 @@ class addcoursemodel(models.Model):
       cousename=models.CharField(max_length=1000)
       status=models.IntegerField()
       createdon=models.DateField()
+      action=models.CharField(max_length=200)
 
 
 

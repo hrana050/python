@@ -1,3 +1,4 @@
+from decimal import Context
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.db import connection
@@ -14,16 +15,15 @@ def login(request):
                checklogin.user=request.POST.get('txt_loginName')
                checklogin.password=request.POST.get('txt_loginpwd')
                cursor=connection.cursor()
-               cursor.execute("select * from loginuser where user='"+ checklogin.user+"'and password='"+checklogin.password+"'")
-               # cursor.execute("call checkuser('"+checklogin.user+"','"+checklogin.password+"')")
-               # args = [checklogin.user, checklogin.password]
-               # cursor.callproc('checkuser',args)
-               result=cursor.fetchall()
+               cursor.callproc('checkuser',[checklogin.user,checklogin.password])
                count=0
-               for number in result:
-                count=1
-                request.session['usersessionid']=number[0]
-                request.session['usersessionname']=number[1]
+               for result in cursor.stored_results(): 
+                   results_1 = result.fetchall()
+               for number in results_1:
+                   count=1
+                   request.session['usersessionid']=number[0]
+                   request.session['usersessionname']=number[1]
+                   connection.close()
                if count>0: 
                   return redirect('dashboard')
                else:
@@ -39,6 +39,12 @@ def login(request):
 def dashboard(request):
     context={}
     return render(request,'Admin/dashboard.html',context)
+   
+def logout(request):
+   context={}
+   del request.session['usersessionid']
+   del request.session['usersessionname']
+   return redirect('adminlogin')
 
 
 

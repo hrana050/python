@@ -1,11 +1,13 @@
 import json
 from django.contrib import messages
+from django.db.models.fields import NullBooleanField
 from django.shortcuts import render,redirect
 from mysite.models import addcoursemodel
 import datetime
 from django.db import connection
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
 
 def addcourse(request):
     context={}
@@ -14,38 +16,41 @@ def addcourse(request):
             course=addcoursemodel()
             course.cousename=request.POST.get('txt_course')
             course.status=request.POST.get('status')
+            course.action='insert'
             cursor=connection.cursor()
-            cursor.execute("call insertcourse ('"+course.cousename+"','"+course.status+"')")
-            connection.close()
-            cursor=connection.cursor()
-            #cursor.execute("call getcourselist")
-            cursor.execute('select * from addcourse')
-            result=cursor.fetchall()
+            cursor.callproc('insertcoursedata',[0,course.cousename,course.status,course.action])
+        for result in cursor.stored_results(): 
+            results_1 = result.fetchall()
             connection.close()
             messages.success(request, course.cousename)
-            return render(request,'Admin/course.html',{'result':result})
+            return render(request,'Admin/course.html',{'result':results_1})
         else:
              messages.error(request,'')
              return render(request,'Admin/course.html',context)
     else:
         cursor=connection.cursor()
-        #cursor.execute("call getcourselist()")
-        cursor.execute('select * from addcourse')
-        result=cursor.fetchall()
+        sno=0
+        status=0
+        cursor.callproc('insertcoursedata',[sno,"",status,"list"])
+        for result in cursor.stored_results(): 
+            results_1 = result.fetchall()
         connection.close()
-        return render(request,'Admin/course.html',{'result':result})
+        return render(request,'Admin/course.html',{'result':results_1})
 def deletecourse(request,sno):
     cursor=connection.cursor()
-    cursor.execute("call deletecourse ('"+ sno +"')")
+    status=0
+    cursor.callproc('insertcoursedata',[sno,'""',status,'delete'])
     connection.close()
     return redirect('addcourse')
 
 def editcourse(request,sno):
     cursor=connection.cursor()
-    cursor.execute("select * from addcourse where sno='"+ sno +"'")
-    result=cursor.fetchall()
+    status=0
+    cursor.callproc('insertcoursedata',[sno,'""',status,'select'])
+    for result in cursor.stored_results(): 
+        results_1 = result.fetchall()
     connection.close()
-    for values in result:
+    for values in results_1:
         values[1]
         values[2]
         values[0]
@@ -62,7 +67,7 @@ def updatecourse(request):
            stu_status=request.POST.get('status')
            stu_sno=request.POST.get('sno')
            cursor=connection.cursor()
-           cursor.execute("call updatecourse ('"+stu_sno+"','"+stu_coursename+"','"+stu_status+"')")
+           cursor.execute("call insertcoursedata ('"+stu_sno+"','"+stu_coursename+"','"+stu_status+"','update')")
            connection.close()
            data = {
             'my_data':1

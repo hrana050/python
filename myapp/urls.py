@@ -14,6 +14,7 @@ urlpatterns=[
     path('',views.home,name='home'),
     path('about',views.about,name='about'),
     path('adminlogin',loginviews.login,name='adminlogin'),
+    path('logout',loginviews.logout,name='logout'),
     #path('afterlogin', views.afterlogin_view),
     path('dashboard', loginviews.dashboard, name='dashboard'),
     path('studentlist', student.studentlist, name='studentlist'),
