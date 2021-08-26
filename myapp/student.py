@@ -1,12 +1,16 @@
+import io
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.db import connection
-from mysite.models import loginmodel, studentmodel
+from mysite.models import loginmodel, studentmodel,Person
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.files.storage import FileSystemStorage
 import os
 import datetime
+import hashlib
+from django.core.files.base import ContentFile
+from django.core.exceptions import ValidationError
 
 def addstudent(request):    
     context={} 
@@ -25,20 +29,23 @@ def addstudent(request):
              enquiry.course=int(request.POST.get('stu_course'))
              enquiry.address=request.POST.get('address')
              enquiry.profilepic=request.FILES['profile']
-             fs=FileSystemStorage()
-             fs.save(enquiry.profilepic.name,enquiry.profilepic)
+             enquiry.filename=" "
              enquiry.status=int(request.POST.get('stu_status'))
-             enquiry.createdon=datetime.date.today()
-             enquiry.save()
              cursor=connection.cursor()
-             cursor.execute("select sno  from addstudent order by sno desc  LIMIT 1")
-             result=cursor.fetchall()
-             connection.close()
+             cursor.callproc('insertstudent',[enquiry.firstname,enquiry.lastname,enquiry.idno, enquiry.userid,
+             enquiry.emailid,enquiry.password,enquiry.contactno,enquiry.year,enquiry.dob,enquiry.course,enquiry.address,
+             enquiry.filename,enquiry.status])
              count=0
-             for number in result:
-                 print(number[0])
+             for result in cursor.stored_results(): 
+                 results_1 = result.fetchall()
+             for values in results_1:
+                 values[0]
+                 enquiry=Person()
+                 enquiry.photo=request.FILES['profile']
+                 enquiry.save()
+                    
                  count=1
-             if count==1:
+             if count>0:
                            messages.success(request, enquiry.firstname)
                            return render(request, 'Admin/Addstudent.html',context)
              else:
@@ -63,3 +70,4 @@ def studentlist(request):
      for number in result:
          print(number[0])
      return render(request, 'Admin/studentlist.html',{'result':result})
+
