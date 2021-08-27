@@ -37,22 +37,17 @@ class importexceltodb(models.Model):
       contactno=models.CharField(max_length=200)
       class Meta:
           db_table="upload_Excel"
-def rename_image(instance, filename):
-    return instance + '.jpg'
-def wrapper(instance, filename):
-        print(filename)
-        ext = filename.split('.')[-1]
-        print(ext)
-        # get filename
-        if instance:
-            filename = '{}.{}'.format(instance, ext)
-            print(filename)
-        else:
-            # set filename as random string
-            filename = '{}.{}'.format(uuid4().hex, ext)
-        # return the whole path to the file
-        return wrapper
-    
+
+import time
+def upload_to(instance,filename):
+    cursor=connection.cursor()
+    cursor.execute("select sno  from addstudent order by sno desc  LIMIT 1")
+    result = cursor.fetchall()
+    for values in result:
+        filename = values[0]
+    return '%s/%s.jpg' % ('student/',filename)
+
+
 class studentmodel(models.Model):
    sno =models.IntegerField()
    firstname =models.CharField(max_length=200)
@@ -66,23 +61,11 @@ class studentmodel(models.Model):
    dob =models.CharField(max_length=200)
    course =models.IntegerField()
    address =models.CharField(max_length=6000)
-   profilepic =models.ImageField(upload_to=wrapper)
-   filename=CharField(max_length=200)
+   profilepic =models.ImageField(upload_to='')
    status=models.IntegerField()
    createdon=models.DateField()
    class Meta:
         db_table = "addstudent"
-
-def generate_unique_name(path,format):
-        filesize = format.file.size
-        print(filesize)
-
-        return os.path.join(path, format)
-
-class MyModel(models.Model):
-    upload = models.ImageField(upload_to=generate_unique_name)
-        
-
 
 class addcoursemodel(models.Model):
       sno=models.IntegerField()
@@ -90,19 +73,7 @@ class addcoursemodel(models.Model):
       status=models.IntegerField()
       createdon=models.DateField()
       action=models.CharField(max_length=200)
-import time
-def upload_to(instance, filename):
-    cursor=connection.cursor()
-    result=cursor.execute("select sno  from addstudent order by sno desc  LIMIT 1")
-    result.fetchall()
-    for values in result:
-        filename = values[0]
-    #filename = time.strftime('%Y%m%d%H%M%S')
-    ym = time.strftime('%Y%m')
-    return '%s/%s.jpg' % (ym,filename)
 
-class Person(models.Model):
-      photo = models.ImageField(upload_to=upload_to)
 
 
 

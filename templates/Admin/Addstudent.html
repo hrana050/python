@@ -2,6 +2,7 @@
 {%block main_body%}
 {% load static %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="{%  static  'js/studentjsfile.js'  %}"></script>
 <script language="javascript" type="text/javascript">
   $(function () {
   $('#txt_dob').datetimepicker({
@@ -59,7 +60,7 @@ $(function () {
             
               {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ message }}!</strong> your submission has been submitted
+                <strong>{{ message }}!</strong> your details has been submitted
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -77,12 +78,11 @@ $(function () {
               <div class="card-header">
                 <h3 class="card-title">Student</h3>
                 <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
+                  <span style="float: right;"><a href="{% url 'studentlist' %}">View Student List</a></span>
                 </div>
               </div>
               <form method="POST" action="{% url 'addstudent' %}" enctype="multipart/form-data">
+                <input type="hidden" id="studentid" name="studentid" />
                 {% csrf_token %}
               <div class="card-body">
                 <div class="form-group">
@@ -139,7 +139,7 @@ $(function () {
                         <div class="col-md-6">
                       <label for="inputName">Course</label>
                       <select id="stu_course" class="form-control custom-select" name="stu_course">
-                        <option selected disabled>Select one</option>
+                        <option value="0" selected disabled>Select Course</option>
                         {% for course in records %}
                         <option value="{{ course.0 }}">{{ course.1 }}</option>
                         {% endfor %}
@@ -148,7 +148,7 @@ $(function () {
                     <div class="col-md-6">
                         <label for="inputName">Admission Year</label>
                         <select id="stu_year" class="form-control custom-select" name="stu_year">
-                            <option selected disabled>Select one</option>
+                          <option value="0" selected disabled>Select Admission Year</option>
                             <option value="2010">2010</option>
                             <option value="2011">2011</option>
                             <option value="2012">2012</option>
@@ -177,7 +177,7 @@ $(function () {
                         <div class="col-md-6">
                       <label for="inputName">Status</label>
                       <select id="stu_status" class="form-control custom-select" name="stu_status">
-                        <option selected disabled>Select Status</option>
+                        <option value="2" selected disabled>Select Status</option>
                         <option value="1">Active</option>
                         <option value="0">inActive</option>
                       </select>
@@ -190,8 +190,9 @@ $(function () {
                 </div>
                 <div class="row">
                     <div class="col-12">
-                      <a href="#" class="btn btn-secondary float-right">Cancel</a>
-                      <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px;">
+                      <a class="btn btn-secondary float-right" href="{% url 'cancel' %}" style="cursor:pointer" id="cancel">Cancel</a>
+                      <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px;" id="submit">
+                      <a  class="btn btn-success float-right" style="margin-right: 15px;cursor:pointer" href="{% url 'update' %}" id="update">Update</a>
                     </div>
                   </div>
               </div>
@@ -202,8 +203,8 @@ $(function () {
           </div>
           <div class="col-md-4">
             <div class="card card-secondary">
-              <div class="card-header" style="background-color: #f6f6f6;;">
-                <h3 class="card-title">Selected Pic</h3>
+              <div class="card-header" style="background-color: #f6f6f6;">
+                <h3 class="card-title" style="color:black">Selected Pic</h3><br><br>
                 <img id="studentimg" src="#" alt="your image" style="width: 100%;" />
               </div>
               

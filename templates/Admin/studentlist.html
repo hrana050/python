@@ -19,6 +19,7 @@
                 <li class="breadcrumb-item"><a href="#">Master</a></li>
                 <li class="breadcrumb-item"><a href="#">Manage Student</a></li>
                 <li class="breadcrumb-item active">Student List</li>
+               
             </ol>
           </div>
         </div>
@@ -33,7 +34,8 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student List</h3>
+                <h3 class="card-title">Student List </h3>
+                <span style="float: right;"><a href="{% url 'addstudent' %}">Add Student</a></span>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -42,10 +44,13 @@
                   <tr>
                     <th>Sno</th>
                     <th>Name</th>
-                    <th>Id</th>
                     <th>Course</th>
                     <th>Addmission Year</th>
+                    <th>Emailid</th>
+                    <th>Contact No</th>
+                    <th>DOB</th>
                     <th>Status</th>
+                    <th>Createdon</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -53,15 +58,26 @@
                     {% for stud in result %}
                   <tr>
                       
-                    <td>{{stud.0}}</td>
-                    <td>{{stud.1}} {{stud.2}}</td>
-                    <td>{{stud.3}}</td>
-                    <td>
-                      {{stud.10}}
-                   </td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{stud.1}}</td>
+                    <td>{{stud.7}}</td>
                     <td>{{stud.8}}</td>
-                    <td>{{stud.13}}</td>
-                    <td><i class="fas fa-edit"></i>  <i class="fas fa-trash-alt"></i></td>
+                    <td>{{stud.2}}</td>
+                    <td>{{stud.3}}</td>
+                    <td>{{stud.4}}</td>
+                    <td>
+                      {% if stud.5 == 1 %}
+                      <span class="activedot"></span>
+                       
+                      {% else %}
+                      <span class="inactivedot"></span>
+                      {% endif %}
+                  </td>
+                  <td>{{stud.6}}</td>
+                    <td>
+                      <a href="edit/{{stud.0}}" style="cursor: pointer;" class="test"><i class="fas fa-edit"></i> </a>
+                      <a href="/deletestudent/{{stud.0}}" id="btndelete"><i class="fas fa-trash-alt" style="color:red"></i></a>
+                      </td>
                   </tr>
                   {% endfor %}
                   </tbody>
