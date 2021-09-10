@@ -26,8 +26,8 @@ urlpatterns=[
     path('edit/<sno>', student.edit, name='edit'),
     url('cancel', student.cancel, name='cancel'), 
     url(r'^deletestudent/(?P<sno>\d+)/$', student.deletestudent, name='deletestudent'), 
-    path('update', student.update,name='update'),
     path('',views.master,name='master'),
+    path('uploadimage', views.home_view),
 
     # url(r'^updatecourse/(?P<coursedata>\d+)/$', courseview.updatecourse, name='updatecourse'),
     # path('editstudent/<sno>', student.editstudent, name='editstudent'),

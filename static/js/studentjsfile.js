@@ -12,6 +12,7 @@ $.ajax({
     url: "/editstudent/" + getsno,
     datatype:'json',
     success: function(data) {
+
     $("#txt_f_name").val(data.my_data[1]);
     $('#txt_l_name').val(data.my_data[2]);
     $("#txt_id").val(data.my_data[3]);

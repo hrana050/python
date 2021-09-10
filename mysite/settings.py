@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path 
-import pyodbc
 # import django_heroku
 
 # django_heroku.settings(locals())
@@ -99,10 +98,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "mysql.connector.django",
+        "ENGINE": "django.db.backends.mysql",
         "NAME": "py_demo",
         "USER": "root",
-        "PASSWORD": "sa@2008",
+        "PASSWORD": "Hemant@8802",
         "HOST": "127.0.0.1",
         "PORT":"3306",
         "OPTIONS": { 'autocommit': True,

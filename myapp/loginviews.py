@@ -15,10 +15,10 @@ def login(request):
                checklogin.user=request.POST.get('txt_loginName')
                checklogin.password=request.POST.get('txt_loginpwd')
                cursor=connection.cursor()
-               cursor.callproc('checkuser',[checklogin.user,checklogin.password])
+               args = (checklogin.user,checklogin.password)
+               cursor.callproc('checkuser',args)
                count=0
-               for result in cursor.stored_results(): 
-                   results_1 = result.fetchall()
+               results_1 = cursor.fetchall()
                for number in results_1:
                    count=1
                    request.session['usersessionid']=number[0]

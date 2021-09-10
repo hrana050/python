@@ -1,7 +1,7 @@
 import os
 from uuid import uuid4
 from django.db import models
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, IntegerField
 from django.db import connection
 
 class studentdetails(models.Model):
@@ -37,17 +37,6 @@ class importexceltodb(models.Model):
       contactno=models.CharField(max_length=200)
       class Meta:
           db_table="upload_Excel"
-
-import time
-def upload_to(instance,filename):
-    cursor=connection.cursor()
-    cursor.execute("select sno  from addstudent order by sno desc  LIMIT 1")
-    result = cursor.fetchall()
-    for values in result:
-        filename = values[0]
-    return '%s/%s.jpg' % ('student/',filename)
-
-
 class studentmodel(models.Model):
    sno =models.IntegerField()
    firstname =models.CharField(max_length=200)
@@ -65,7 +54,7 @@ class studentmodel(models.Model):
    status=models.IntegerField()
    createdon=models.DateField()
    class Meta:
-        db_table = "addstudent"
+        db_table = "student"
 
 class addcoursemodel(models.Model):
       sno=models.IntegerField()
@@ -74,7 +63,13 @@ class addcoursemodel(models.Model):
       createdon=models.DateField()
       action=models.CharField(max_length=200)
 
+class ImagefieldModel(models.Model): 
+    sno=IntegerField()
+    title = models.CharField(max_length = 200) 
+    pic = models.ImageField(upload_to = "profileimg/")
 
+    class Meta:
+        db_table = "insertimage"
 
 
 

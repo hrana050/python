@@ -1,7 +1,7 @@
 from decimal import Context
 from django.db import connection
 from mysite.models import usestoreprocesure
-from django.http import response
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from mysite.models import studentdetails
@@ -10,6 +10,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.core.files.storage import FileSystemStorage
+
+
+from mysite.form import ImagefieldForm
+from mysite.models import ImagefieldModel 
 
 def home(request):
     context={}
@@ -71,6 +75,28 @@ def saverecord(request):
          
     return Response(saveserialize.data,status=status.HTTP_201_CREATED)
     return Response(saveserialize.data,status=status.HTTP_400_BAD_REQUEST)
+
+def home_view(request): 
+    context = {}
+    if request.method == "POST": 
+        form = ImagefieldForm(request.POST, request.FILES) 
+        if form.is_valid(): 
+            title = form.cleaned_data.get("name") 
+            img = form.cleaned_data.get("image_field") 
+            obj = ImagefieldModel.objects.create( 
+                                 title = title,  
+                                 pic = img 
+                                 ) 
+            obj.save() 
+            print(obj)
+            return redirect('success') 
+    else: 
+        form = ImagefieldForm()
+        context['form'] = form
+        return render( request, "fileupload.html", context) 
+
+def success(request): 
+    return HttpResponse('successfully uploaded') 
     #return render(request, 'index.html')
 
 

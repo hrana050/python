@@ -9,10 +9,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.files.storage import FileSystemStorage
 from mysite.serializers import updatestudent 
-import datetime
+import datetime 
+import os
+from django.db import models
 
 def addstudent(request):   
     context={}
+    if request.method == "POST" and 'profile' in request.FILES:
+       file, fileExtension = os.path.splitext(request.FILES['profile'].name)
+       get_file_path(request.FILES['profile'].name)
+       #print(file)
+       #print(fileExtension)
     if request.method=="POST":
         if request.POST.get('txt_f_name')and request.POST.get('txt_l_name'):
              enquiry=studentmodel()
@@ -30,56 +37,40 @@ def addstudent(request):
              enquiry.profilepic=request.FILES['profile']
              enquiry.status=int(request.POST.get('stu_status'))
              enquiry.createdon=datetime.date.today()
+             if len(request.FILES) !=0:
+                 enquiry.profilepic=request.FILES['profile']
              enquiry.save()
-             cursor=connection.cursor()
-             cursor=connection.cursor()
-             cursor.callproc('getstudentsno')
-             count=0
-             for result in cursor.stored_results(): 
-                 results_1 = result.fetchall()
-             for values in results_1:
-                 count=1
-             if count>0:
-                           messages.success(request, enquiry.firstname)
-                           return render(request, 'Admin/Addstudent.html',context)
-             else:
-                           messages.error(request, enquiry.firstname)
-                           return render(request, 'Admin/Addstudent.html',context)
+             messages.success(request,enquiry.firstname)
+             return render(request, 'Admin/Addstudent.html',context)
         else:
              messages.error(request, "Please fill the field...!")
              return render(request, 'Admin/Addstudent.html',context)          
     else: 
             cursor = connection.cursor()
-            cursor.callproc('insertcoursedata',[0,"",0,"list"])
-            for result in cursor.stored_results(): 
-                results_1 = result.fetchall()
+            cursor.callproc('CUSD_course',[0,"",0,"list"])
+            result = cursor.fetchall()
+            for result_1 in result: 
+                count=1
                 connection.close()
-            return render(request,'Admin/Addstudent.html',{'records':results_1})
+            return render(request,'Admin/Addstudent.html',{'records':result})
 
 def studentlist(request):
      context={} 
      cursor=connection.cursor()
      cursor.callproc('insertstudent',[0,'','','','','','','','','',0,'','',0,'list'])
-     for result in cursor.stored_results(): 
-        results_1 = result.fetchall()
+     results_1 = cursor.fetchall()
+     print(results_1)
+     for result in results_1:
         connection.close()
-        for values in results_1:
-         return render(request, 'Admin/studentlist.html',{'result':results_1})
+        return render(request, 'Admin/studentlist.html',{'result':results_1})
 
 def editstudent(request,sno):
     cursor=connection.cursor()
-    cursor.callproc('insertstudent',[sno,'','','','','','','','','',0,'','',0,'getdetails'])
-    for result in cursor.stored_results(): 
-        results_1 = result.fetchall()
-    connection.close()
-    for values in results_1:
-        values[0],values[1],values[2],values[3],
-        values[4],values[5],values[6],values[7],
-        values[8],values[9],values[10],values[11],
-        values[15]
+    cursor.callproc('insertstudent',[sno,'','','','','','','','','',0,'','',0,'edit'])
 
-    data = {
-            'my_data':values
+    for result in cursor.fetchall():
+        data = {
+            'my_data':result
     }
     return JsonResponse(data)
 
@@ -87,10 +78,10 @@ def edit(request,sno):
     cursor=connection.cursor()
     sno=0
     status=0
-    cursor.callproc('insertcoursedata',[sno,"",status,"list"])
-    for result in cursor.stored_results(): 
-        results_1 = result.fetchall()
-    connection.close()
+    cursor.callproc('CUSD_course',[sno,"",status,"list"])
+    results_1 = cursor.fetchall()
+    for result in results_1: 
+        connection.close()
     return render(request, 'Admin/Addstudent.html',{'records':results_1})
 
 def cancel(request):
@@ -103,10 +94,8 @@ def deletestudent(request,sno):
     connection.close()
     return redirect('studentlist')
 
-def update(request):  
-    t = studentmodel.objects.get(sno=76)
-    form=updatestudent(instance=t)
-    if forms.is_valid():
-        form.save()
-    return redirect('studentlist') 
+def get_file_path(filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (3, ext)
+    return os.path.join('profile/', filename)
 

@@ -18,12 +18,12 @@ def addcourse(request):
             course.status=request.POST.get('status')
             course.action='insert'
             cursor=connection.cursor()
-            cursor.callproc('insertcoursedata',[0,course.cousename,course.status,course.action])
-        for result in cursor.stored_results(): 
-            results_1 = result.fetchall()
-            connection.close()
+            cursor.callproc('CUSD_course',[0,course.cousename,course.status,course.action])
+            result = cursor.fetchall()
+        for result_1 in result: 
+            count=1
             messages.success(request, course.cousename)
-            return render(request,'Admin/course.html',{'result':results_1})
+            return render(request,'Admin/course.html',{'result':result})
         else:
              messages.error(request,'')
              return render(request,'Admin/course.html',context)
@@ -31,32 +31,28 @@ def addcourse(request):
         cursor=connection.cursor()
         sno=0
         status=0
-        cursor.callproc('insertcoursedata',[sno,"",status,"list"])
-        for result in cursor.stored_results(): 
-            results_1 = result.fetchall()
-        connection.close()
-        return render(request,'Admin/course.html',{'result':results_1})
+        cursor.callproc('CUSD_course',[sno,"",status,"list"])
+        result=cursor.fetchall()
+        for result_1 in result: 
+            count=1
+        return render(request,'Admin/course.html',{'result':result})
 def deletecourse(request,sno):
     cursor=connection.cursor()
     status=0
-    cursor.callproc('insertcoursedata',[sno,'""',status,'delete'])
+    cursor.callproc('CUSD_course',[sno,'""',status,'delete'])
     connection.close()
     return redirect('addcourse')
 
 def editcourse(request,sno):
+    print(sno)
     cursor=connection.cursor()
     status=0
-    cursor.callproc('insertcoursedata',[sno,'""',status,'select'])
-    for result in cursor.stored_results(): 
-        results_1 = result.fetchall()
-    connection.close()
-    for values in results_1:
-        values[1]
-        values[2]
-        values[0]
-    data = {
-            'my_data':values
-    }
+    cursor.callproc('CUSD_course',[sno,'""',status,'edit'])
+    for result in cursor.fetchall(): 
+        for values in result:
+           data = {
+            'my_data':result
+         }
     return JsonResponse(data)
 
 @csrf_exempt
@@ -67,7 +63,7 @@ def updatecourse(request):
            stu_status=request.POST.get('status')
            stu_sno=request.POST.get('sno')
            cursor=connection.cursor()
-           cursor.execute("call insertcoursedata ('"+stu_sno+"','"+stu_coursename+"','"+stu_status+"','update')")
+           cursor.execute("call CUSD_course ('"+stu_sno+"','"+stu_coursename+"','"+stu_status+"','update')")
            connection.close()
            data = {
             'my_data':1
