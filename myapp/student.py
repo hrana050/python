@@ -1,4 +1,5 @@
 import io
+from typing import ItemsView
 from django import forms
 from django.contrib import messages
 from django.http.response import JsonResponse
@@ -15,9 +16,9 @@ from django.db import models
 
 def addstudent(request):   
     context={}
-    if request.method == "POST" and 'profile' in request.FILES:
-       file, fileExtension = os.path.splitext(request.FILES['profile'].name)
-       get_file_path(request.FILES['profile'].name)
+    # if request.method == "POST" and 'profile' in request.FILES:
+    #    file, fileExtension = os.path.splitext(request.FILES['profile'].name)
+    #    get_file_path(request.FILES['profile'].name)
        #print(file)
        #print(fileExtension)
     if request.method=="POST":
@@ -94,8 +95,36 @@ def deletestudent(request,sno):
     connection.close()
     return redirect('studentlist')
 
-def get_file_path(filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % (3, ext)
-    return os.path.join('profile/', filename)
+def update(request):
+    if request.POST.get('txt_f_name'):
+             stu_sno=request.POST.get('sno')
+             enquiry=studentmodel.objects.get(id=stu_sno)
+             enquiry.firstname=request.POST.get('txt_f_name')
+             enquiry.lastname=request.POST.get('txt_l_name')
+             enquiry.idno=request.POST.get('txt_id')
+             enquiry.userid=request.POST.get('txt_userid')
+             enquiry.password=request.POST.get('txt_pwd')
+             enquiry.emailid=request.POST.get('txt_email')
+             enquiry.contactno=request.POST.get('txt_contact')
+             enquiry.year=request.POST.get('stu_year')
+             enquiry.dob=request.POST.get('txt_dob')
+             enquiry.course=int(request.POST.get('stu_course'))
+             enquiry.address=request.POST.get('address')
+             enquiry.status=int(request.POST.get('stu_status'))
+             enquiry.createdon=datetime.date.today()
+             print(request.POST.get('profilepic'))
+             if len(request.FILES) !=0:
+                print(12)
+                if len(enquiry.profilepic)>0:
+                    print(0)
+                    os.remove(enquiry.profilepic.path)
+                    print(request.FILES['profilepic'])
+                    enquiry.profilepic=request.FILES['profilepic']
+              
+             enquiry.save()
+    # if len(request.FILES) !=0:   
+    #        update.profilepic=request.FILES['profile']
+    return JsonResponse([1, 2, 3, 4], safe=False)
+    
+
 

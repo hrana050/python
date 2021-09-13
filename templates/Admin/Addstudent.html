@@ -75,6 +75,7 @@ $(function () {
               </div>
               {% endif %}
              {% endfor %}
+             <div id="updatediv" style="display:none"></div>
               <div class="card-header">
                 <h3 class="card-title">Student</h3>
                 <div class="card-tools">
@@ -192,7 +193,8 @@ $(function () {
                     <div class="col-12">
                       <a class="btn btn-secondary float-right" href="{% url 'cancel' %}" style="cursor:pointer" id="cancel">Cancel</a>
                       <input type="submit" value="Submit" class="btn btn-success float-right" style="margin-right: 15px;" id="submit">
-                      <a  class="btn btn-success float-right" style="margin-right: 15px;cursor:pointer" href="#" id="update">Update</a>
+                      <!-- <input type="button" value="Update" class="btn btn-success float-right" style="margin-right: 15px;" id="update"> -->
+                      <a  class="btn btn-success float-right" style="margin-right: 15px;cursor:pointer" id="update" onclick="updatefunction()">Update</a>
                     </div>
                   </div>
               </div>

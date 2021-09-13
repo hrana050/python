@@ -22,7 +22,7 @@ def login(request):
                for number in results_1:
                    count=1
                    request.session['usersessionid']=number[0]
-                   request.session['usersessionname']=number[1]
+                   request.session['usersessionname']=number[6]
                    connection.close()
                if count>0: 
                   return redirect('dashboard')
@@ -46,5 +46,44 @@ def logout(request):
    del request.session['usersessionname']
    return redirect('adminlogin')
 
+def studentlogin(request):
+    context={}
+    if request.method=="POST":
+            if request.POST.get('txt_loginName')and request.POST.get('txt_loginpwd'):
+               checklogin=loginmodel
+               checklogin.user=request.POST.get('txt_loginName')
+               checklogin.password=request.POST.get('txt_loginpwd')
+               cursor=connection.cursor()
+               args = (checklogin.user,checklogin.password)
+               cursor.callproc('checkstudentlogin',args)
+               count=0
+               results_1 = cursor.fetchall()
+               for number in results_1:
+                   count=1
+                   request.session['usersessionid']=number[0]
+                   request.session['usersessionname']=number[1]
+                   connection.close()
+               if count>0: 
+                  return redirect('studentdashboard')
+               else:
+                  messages.error(request,"invalid user name and password !")
+                  return render(request, 'student/login.html',context)
+            else:
+                messages.error(request,"Enter the username and password !")
+                return render(request,'student/login.html',context)
+                
+    else: 
+               return render(request,'student/login.html',context)
+
+
+def studentdashboard(request):
+    context={}
+    return render(request,'student/dashboard.html',context)
+   
+def logout(request):
+   context={}
+   del request.session['usersessionid']
+   del request.session['usersessionname']
+   return redirect('studentlogin')
 
 

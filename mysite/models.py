@@ -38,7 +38,6 @@ class importexceltodb(models.Model):
       class Meta:
           db_table="upload_Excel"
 class studentmodel(models.Model):
-   sno =models.IntegerField()
    firstname =models.CharField(max_length=200)
    lastname =models.CharField(max_length=200)
    idno =models.CharField(max_length=200)

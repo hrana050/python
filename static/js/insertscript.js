@@ -6,7 +6,7 @@ $(document).on('click', '#btn_submit', function(e) {
   formData.append('contactno', $('#contactno').val())
   formData.append('username', $('#username').val())
   formData.append('profilepic',  $('#profilepic')[0].files[0])
- // formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+  formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
 
   var name=$('#fname').val();
 //   alert(name);
