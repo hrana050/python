@@ -80,7 +80,7 @@ def studentdashboard(request):
     context={}
     return render(request,'student/dashboard.html',context)
    
-def logout(request):
+def studentlogout(request):
    context={}
    del request.session['usersessionid']
    del request.session['usersessionname']

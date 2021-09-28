@@ -60,10 +60,14 @@ def studentlist(request):
      cursor=connection.cursor()
      cursor.callproc('insertstudent',[0,'','','','','','','','','',0,'','',0,'list'])
      results_1 = cursor.fetchall()
-     print(results_1)
+     count=0
      for result in results_1:
-        connection.close()
-        return render(request, 'Admin/studentlist.html',{'result':results_1})
+         count=1
+         connection.close()
+     if(count>0):
+         return render(request, 'Admin/studentlist.html',{'result':results_1})
+     else:
+         return render(request, 'Admin/studentlist.html')
 
 def editstudent(request,sno):
     cursor=connection.cursor()

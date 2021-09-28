@@ -31,20 +31,20 @@
  <script>
 
   $('document').ready(function () {
-      $('body').on('click', '.sidebar-menu a', function () {
+      $('body').on('click', '.nav-item a', function () {
           var a = "hello";
-          var i = $('.sidebar-menu a').index(this);
+          var i = $('.nav-item a').index(this);
           sessionStorage.setItem("aindex", i);
       });
 
       var i = sessionStorage.getItem("aindex");
       if (i != null) {
-          var anchorelement = $(".sidebar-menu a").eq(i);
-          $(anchorelement).parentsUntil("ul.sidebar", "ul").addClass("menu-open").css("display", "block");
-          $(anchorelement).parentsUntil("ul.sidebar", "li").addClass("active");
+          var anchorelement = $(".nav-item a").eq(i);
+          $(anchorelement).parentsUntil("ul.nav-item", "ul").addClass("menu-open").css("display", "block");
+          $(anchorelement).parentsUntil("ul.nav-item", "li").addClass("active");
       }
       else {
-          $("ul.sidebar-menu li").eq(1).addClass("active");
+          $("ul.nav-item li").eq(1).addClass("active");
       }
 
       $('body').on('click', '.signout', function () {

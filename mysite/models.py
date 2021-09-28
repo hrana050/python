@@ -70,6 +70,19 @@ class ImagefieldModel(models.Model):
     class Meta:
         db_table = "insertimage"
 
+class Examsetup(models.Model):
+      Courseid=models.IntegerField()
+      Questionno=models.IntegerField()
+      Question=models.CharField(max_length=5000)
+      op_1=models.CharField(max_length=2000)
+      op_2=models.CharField(max_length=2000)
+      op_3=models.CharField(max_length=2000)
+      op_4=models.CharField(max_length=2000)
+      op_Ans=models.CharField(max_length=2000)
+      E_time=models.IntegerField()
+      action=models.CharField(max_length=200)
+      
+
 
 
     
