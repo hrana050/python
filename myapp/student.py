@@ -39,7 +39,7 @@ def addstudent(request):
              enquiry.status=int(request.POST.get('stu_status'))
              enquiry.createdon=datetime.date.today()
              if len(request.FILES) !=0:
-                 enquiry.profilepic=request.FILES['profile']
+                enquiry.profilepic=request.FILES['profile']
              enquiry.save()
              messages.success(request,enquiry.firstname)
              return render(request, 'Admin/Addstudent.html',context)
