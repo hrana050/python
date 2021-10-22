@@ -62,6 +62,13 @@ class addcoursemodel(models.Model):
       createdon=models.DateField()
       action=models.CharField(max_length=200)
 
+class addcoursetypemodel(models.Model):
+      c_typeid=models.IntegerField()
+      coursetype=models.CharField(max_length=200)
+      status=models.IntegerField()
+      createdon=models.DateField()
+      action=models.CharField(max_length=200)
+
 class ImagefieldModel(models.Model): 
     sno=IntegerField()
     title = models.CharField(max_length = 200) 

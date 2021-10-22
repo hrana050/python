@@ -34,6 +34,12 @@ urlpatterns=[
     path('',views.master,name='master'),
     path('uploadimage', views.home_view),
     path('addexamsetup', examview.addexamset, name='addexamsetup'),
+    path('addcoursetype', courseview.addcoursetype, name='addcoursetype'),
+    url(r'^editcoursetype/(?P<sno>\d+)/$', courseview.editcoursetype, name='editcoursetype'),
+    url('updatecoursetype', courseview.updatecoursetype, name='updatecoursetype'),
+
+
+
     # url(r'^updatecourse/(?P<coursedata>\d+)/$', courseview.updatecourse, name='updatecourse'),
     # path('editstudent/<sno>', student.editstudent, name='editstudent'),
     # url('saverecord',views.saverecord,name='saverecord'),
